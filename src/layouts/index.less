@@ -1,8 +1,15 @@
+@headerHeight: 60px;
+@contentHeight: 100% - @headerHeight;
+@sideWidth: 200px;
+@contentWidth: 100% - @sideWidth;
+@breadCrumbHeight: 30px;
 
 .sma-layout {
   height: 100vh;
   width: 100vw;
-  min-width: 1000px;
+  min-width: 800px;
+  min-height: 600px;
+  overflow: hidden;
 }
 
 .trigger {
@@ -15,7 +22,6 @@
 
 .trigger:hover {
   color: #1890ff;
-
 }
 
 .logo {
@@ -41,6 +47,8 @@
 .site-layout .site-layout-background {
   text-align: left;
   background: #fff;
+  overflow: hidden;
+  height: @headerHeight;
 }
 
 .sma-site-header {
@@ -48,6 +56,11 @@
   width: 100%;
   padding: 0 24px;
   justify-content: space-between;
+}
+
+.side {
+  width: @sideWidth;
+  background-color: #c2c8d5;
 }
 
 .sma-header {
@@ -60,4 +73,9 @@
 .sma-header-item {
   margin: 0 10px;
   height: fit-content;
+}
+
+.site-content {
+  height: calc(100% - 60px);
+  width: @contentWidth;
 }

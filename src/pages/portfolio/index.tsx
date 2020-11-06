@@ -5,7 +5,7 @@ export default class Home extends React.Component {
   render() {
     return (
       <>
-        <Redirect to="/portfolio" />
+        <Redirect to="/portfolio/glance" />
       </>
     );
   }

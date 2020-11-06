@@ -21,12 +21,15 @@
   },
   "dependencies": {
     "@ant-design/pro-layout": "^5.0.12",
+    "@types/numeral": "^0.0.28",
     "@umijs/preset-react": "^1.6.8",
     "@umijs/test": "^3.2.22",
     "lint-staged": "^10.0.7",
+    "numeral": "^2.0.6",
     "prettier": "^1.19.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "react-window": "^1.8.6",
     "umi": "^3.2.22",
     "yorkie": "^2.0.0"
   }
