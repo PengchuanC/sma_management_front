@@ -4,64 +4,25 @@ import numeral from 'numeral';
 import './list.less';
 import { history } from 'umi';
 import { PortfolioContext } from '@/common/localstorage';
-
-numeral.nullFormat('-');
+import api from '@/common/http';
+import { numeralNum } from '@/common/util';
 
 interface record {
   key: string;
-  portcode: string;
-  porttype: string;
-  launchdate: string;
-  netasset: number;
-  init: number;
+  port_code: string;
+  port_type: string;
+  launch_date: string;
+  last: string;
+  net_asset: number;
+  init_money: number;
   add: number;
   profit: number;
   nav: number;
   nav_acc: number;
   cash: number;
   value: number;
-  fa: '彭传超';
+  fa: string;
 }
-
-function numeralNum(num: number) {
-  if (Math.abs(num) <= 2) {
-    return numeral(num).format('0.0000');
-  }
-  return numeral(num).format('0,0.00');
-}
-
-const dataSource: Array<record> = [
-  {
-    key: '1',
-    portcode: 'SA5001',
-    porttype: '现金型',
-    launchdate: '2020-10-14',
-    netasset: 10000000,
-    init: 10000000,
-    add: 0,
-    profit: 0,
-    nav: 1.0,
-    nav_acc: 1.0,
-    cash: 100000000,
-    value: 0,
-    fa: '彭传超',
-  },
-  {
-    key: '2',
-    portcode: 'SA5003',
-    porttype: '平衡型',
-    launchdate: '2020-10-15',
-    netasset: 10000000,
-    init: 10000000,
-    add: 0,
-    profit: 0,
-    nav: 1.0,
-    nav_acc: 1.0,
-    cash: 1000000000,
-    value: 0,
-    fa: '彭传超',
-  },
-];
 
 export default class PortfolioTable extends React.Component {
   state = {
@@ -70,13 +31,20 @@ export default class PortfolioTable extends React.Component {
       columnKey: undefined,
       order: false,
     },
+    data: [],
   };
+
+  fetchData() {
+    api.get('/basic/all/').then(r => {
+      this.setState({ data: r.data });
+    });
+  }
 
   static contextType = PortfolioContext;
 
   // 按类型筛选
   filterType = (value: string, record: record) => {
-    return record.porttype === value;
+    return record.port_type === value;
   };
 
   handleClick = (portcode: string) => {
@@ -84,19 +52,23 @@ export default class PortfolioTable extends React.Component {
     history.push(portcode + '/overview');
   };
 
+  componentDidMount() {
+    this.fetchData();
+  }
+
   render() {
     let { sortedInfo, filteredInfo } = this.state;
     let columns: Array<Object> | [] = [
       {
         title: '产品代码',
-        dataIndex: 'portcode',
-        key: 'portcode',
+        dataIndex: 'port_code',
+        key: 'port_code',
         align: 'center',
       },
       {
         title: '产品类型',
-        dataIndex: 'porttype',
-        key: 'porttype',
+        dataIndex: 'port_type',
+        key: 'port_type',
         align: 'center',
         filters: [
           { text: '现金型', value: '现金型' },
@@ -106,24 +78,30 @@ export default class PortfolioTable extends React.Component {
       },
       {
         title: '运作起始日',
-        dataIndex: 'launchdate',
-        key: 'launchdate',
+        dataIndex: 'launch_date',
+        key: 'launch_date',
         align: 'center',
-        sorter: (a: record, b: record) => a.launchdate > b.launchdate,
+        sorter: (a: record, b: record) => a.launch_date > b.launch_date,
+      },
+      {
+        title: '最新净值日',
+        dataIndex: 'last',
+        key: 'last',
+        align: 'center',
       },
       {
         title: '净资产',
-        dataIndex: 'netasset',
-        key: 'netasset',
+        dataIndex: 'net_asset',
+        key: 'net_asset',
         align: 'right',
-        render: (text: any, record: record) => numeralNum(record.netasset),
+        render: (text: any, record: record) => numeralNum(record.net_asset),
       },
       {
         title: '初始资产',
-        dataIndex: 'init',
-        key: 'init',
+        dataIndex: 'init_money',
+        key: 'init_money',
         align: 'right',
-        render: (text: any, record: record) => numeralNum(record.init),
+        render: (text: any, record: record) => numeralNum(record.init_money),
       },
       {
         title: '期间追加',
@@ -175,7 +153,7 @@ export default class PortfolioTable extends React.Component {
     ];
     return (
       <Table
-        dataSource={dataSource}
+        dataSource={this.state.data}
         columns={columns}
         bordered
         pagination={false}
@@ -183,7 +161,7 @@ export default class PortfolioTable extends React.Component {
         className="table"
         onRow={(record: record) => {
           return {
-            onClick: () => this.handleClick(record.portcode),
+            onClick: () => this.handleClick(record.port_code),
           };
         }}
       />

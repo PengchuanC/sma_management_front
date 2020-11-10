@@ -8,8 +8,9 @@ import BreadCrumb, { routes } from '@/common/breadcrumb';
 import { Statistic, Row, Col, Card, Dropdown, Menu, Button } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 import PortfolioTable from './table';
+import api from '@/common/http';
 
-class CustomDropdown extends React.Component<any, any> {
+export class CustomDropdown extends React.Component<any, any> {
   state = {
     active: 0,
   };
@@ -59,6 +60,22 @@ export default class Glance extends React.Component<any, any> {
     { name: '首页概览', route: '/portfolio/glance' },
   ];
 
+  state = {
+    num: 0,
+    total: 0,
+    avg: 0,
+  };
+
+  fetchData() {
+    api.get('/basic/all/').then(r => {
+      this.setState({ num: r.num, total: r.total, avg: r.avg });
+    });
+  }
+
+  componentDidMount() {
+    this.fetchData();
+  }
+
   render() {
     return (
       <div className={styles.layoutContent}>
@@ -69,17 +86,25 @@ export default class Glance extends React.Component<any, any> {
           <Row>
             <Col offset={1} span={4}>
               <Card className={styles.statisticCard}>
-                <Statistic title="账户总数" value={1} />
+                <Statistic title="账户总数" value={this.state.num} />
               </Card>
             </Col>
             <Col span={4}>
               <Card className={styles.statisticCard}>
-                <Statistic title="管理资产" value={10000000} precision={2} />
+                <Statistic
+                  title="管理资产"
+                  value={this.state.total}
+                  precision={2}
+                />
               </Card>
             </Col>
             <Col span={4}>
               <Card className={styles.statisticCard}>
-                <Statistic title="户均资产" value={112893} precision={2} />
+                <Statistic
+                  title="户均资产"
+                  value={this.state.avg}
+                  precision={2}
+                />
               </Card>
             </Col>
           </Row>

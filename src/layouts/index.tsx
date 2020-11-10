@@ -14,6 +14,8 @@ import {
   FileWordOutlined,
   CommentOutlined,
   LogoutOutlined,
+  HistoryOutlined,
+  FundOutlined,
 } from '@ant-design/icons';
 import './index.less';
 import logo from '@/assets/images/logoNew.png';
@@ -131,16 +133,16 @@ class MainLayout extends React.Component {
                 <Menu.Item key="1" icon={<AppstoreOutlined />}>
                   首页概览
                 </Menu.Item>
-                <Menu.Item key="2" icon={<BarChartOutlined />}>
+                <Menu.Item key="2" icon={<FundOutlined />}>
                   账户总览
                 </Menu.Item>
                 <Menu.Item key="3" icon={<BarChartOutlined />}>
                   投资分析
                 </Menu.Item>
-                <Menu.Item key="4" icon={<BarChartOutlined />}>
+                <Menu.Item key="4" icon={<HistoryOutlined />}>
                   投资记录
                 </Menu.Item>
-                <Menu.Item key="5" icon={<BarChartOutlined />}>
+                <Menu.Item key="5" icon={<HistoryOutlined />}>
                   模拟投资
                 </Menu.Item>
               </Menu.SubMenu>
