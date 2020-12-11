@@ -28,7 +28,8 @@
 }
 
 .spin {
-  height: 100%;
+  height: 300px;
+  line-height: 300px;
   width: 100%;
 }
 
@@ -99,8 +100,47 @@
 
   .chart {
     width: calc(100% - 5px);
-    height: 200px;
+    height: 250px;
     margin-left: 5px;
   }
 }
 
+.holding {
+  overflow-y: auto;
+
+  .holdingDropdown {
+    margin-top: -10px;
+    margin-left: 5px;
+  }
+
+  .holdingFundTable {
+    height: 100%;
+    //overflow-x: auto;
+  }
+}
+
+.summaryRight {
+  text-align: right;
+}
+
+.attribute {
+  display: inline-flex;
+  flex-wrap: wrap;
+  width: 100%;
+  overflow-y: auto;
+
+  .card {
+    width: 49%;
+    height: 380px;
+    margin-bottom: 5px;
+
+    .chart {
+      height: 325px;
+      width: 100%;
+    }
+  }
+
+  .card:nth-child(odd){
+    margin-right: 1%;
+  }
+}

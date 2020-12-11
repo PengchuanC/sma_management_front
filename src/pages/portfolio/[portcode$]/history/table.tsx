@@ -55,7 +55,10 @@ export default class HistoryTable extends React.Component<any, any> {
         dataIndex: 'date',
         key: 'date',
         align: 'center',
-        sorter: (a: dataType, b: dataType) => a.date > b.date,
+        sorter: (a: dataType, b: dataType) => {
+          if (a.date > b.date) return 1
+          else return -1
+        },
         filters: this.state.filter.date,
         onFilter: (value: string, record: dataType) => value === record.date
       },

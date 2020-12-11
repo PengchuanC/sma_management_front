@@ -3,9 +3,11 @@ import { DatePicker, Tabs } from 'antd';
 import BreadCrumb, { routes } from '@/common/breadcrumb';
 import styles from './analysis.less';
 import { AnalysisTabContext } from '@/common/localstorage';
-import Performance from '@/pages/portfolio/[portcode$]/analysis/performance';
 import style from '@/pages/portfolio/[portcode$]/analysis/analysis.less';
 import moment from 'moment';
+import Performance from '@/pages/portfolio/[portcode$]/analysis/performance';
+import Holding from '@/pages/portfolio/[portcode$]/analysis/holding';
+import Attribute from '@/pages/portfolio/[portcode$]/analysis/attribute';
 
 
 // 日期选择模块，利用context更新组件
@@ -46,11 +48,11 @@ class AnalysisTabs extends React.Component<any, any> {
     },
     {
       name: '持仓分布',
-      comp: <div>标签2</div>
+      comp: <Holding portCode={this.props.portCode} />
     },
     {
       name: '业绩归因',
-      comp: <div>标签3</div>
+      comp: <Attribute portCode={this.props.portCode} />
     }
   ]
 

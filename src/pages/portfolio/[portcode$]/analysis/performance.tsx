@@ -1,10 +1,11 @@
 import React from 'react';
-import { Row, Col, Spin, Button } from 'antd';
+import { Row, Col, Spin, Button, message } from 'antd';
 import echarts from 'echarts';
 import numeral from 'numeral';
 import style from './analysis.less'
 import { AnalysisTabContext } from '@/common/localstorage';
 import http from '@/common/http';
+import { warning } from '@/common/util';
 
 let performance: performanceType = {
   acc_return_yield: { b: 0, p: 0 },
@@ -19,9 +20,6 @@ let performance: performanceType = {
   trading_day_count: { b: { draw: 0, lose: 0, win: 0 }, p: { draw: 0, lose: 0, win: 0 } },
   var: { b: 0, p: 0 }
 }
-
-let contribute: contributeType = { alter: 0, bond: 0, equity: 0, money: 0, total_profit: 0 }
-
 
 function percent(value: number) {
   return numeral(value).format('0.00%')
@@ -61,11 +59,13 @@ class PerformanceTable extends React.Component<any, any> {
   state = {
     data: performance,
     finish: false,
-    date: this.context.date
+    date: this.context.date,
+    needUpdate: true,
   }
 
   // 获取组合业绩值表评估数据
   fetchData = () => {
+    this.setState({finish: false})
     http.get('/analysis/performance/', {
       params:{date: this.context.date.format("YYYY-MM-DD"), portCode: this.props.portCode}
     }).then(r=>{
@@ -74,22 +74,20 @@ class PerformanceTable extends React.Component<any, any> {
   }
 
   componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<any>, snapshot?: any) {
-    this.fetchData()
+    if (this.context.date.date() !== this.state.date.date() && this.state.finish) {
+      this.fetchData()
+    }
   }
 
   componentDidMount() {
     this.fetchData()
   }
 
-  shouldComponentUpdate(nextProps: Readonly<any>, nextState: Readonly<any>, nextContext: any): boolean {
-    return this.state.date != this.context.date
-  }
-
 
   render() {
-    const d: performanceType = this.state.data
+    let d: performanceType = this.state.data
     return (
-      !this.state.finish? <Spin className={style.spin} />:
+      !this.state.finish || d === undefined? <Spin className={style.spin} />:
           <div className={style.performance}>
             <Button className={style.button}>主要业绩指标</Button>
             <table cellSpacing="1">
@@ -212,7 +210,7 @@ class PerformanceChart extends React.Component<any, any> {
   static contextType = AnalysisTabContext
 
   state = {
-    data: contribute
+    date: this.context.date
   }
 
   ref: React.RefObject<any> = React.createRef()
@@ -226,7 +224,7 @@ class PerformanceChart extends React.Component<any, any> {
       grid: {
         left: 40,
         top: 30,
-        height: 135
+        height: 185
       },
       textStyle: {
         fontSize: 12
@@ -275,6 +273,8 @@ class PerformanceChart extends React.Component<any, any> {
     }).then(r=>{
       this.showChart(r)
       this.setState({})
+    }).catch(e=>{
+      warning()
     })
   }
 
@@ -287,7 +287,7 @@ class PerformanceChart extends React.Component<any, any> {
   }
 
   shouldComponentUpdate(nextProps: Readonly<any>, nextState: Readonly<any>, nextContext: any): boolean {
-    return false
+    return false;
   }
 
   render() {

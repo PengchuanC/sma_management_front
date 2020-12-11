@@ -1,0 +1,102 @@
+@import '../../layouts/index';
+
+.contentArea {
+  height: calc(100% - @breadCrumbHeight);
+  background-color: white;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 15px;
+  overflow-y: auto;
+}
+
+.statisticWrapper {
+  display: inline-flex;
+  height: 100px;
+  justify-content: start;
+  margin-top: 10px;
+}
+
+.statisticCard {
+  height: 100px;
+  width: 200px;
+  text-align: center;
+  margin-right: 5px;
+}
+
+.statisticCard:not(:last-child) {
+  margin-right: 20px;
+}
+
+.calculator {
+  margin-top: 20px;
+  height: fit-content;
+  width: 98%;
+}
+
+.itemWrapper {
+  display: inline-flex;
+  width: 100%;
+  justify-content: start;
+  margin-top: 10px;
+
+  .item {
+    text-align: center;
+    margin-left: 10px;
+    min-width: 100px;
+    width: 100px;
+  }
+
+  .itemTitle {
+    .item;
+    margin-top: 10px;
+  }
+
+  .itemWidder {
+    .item;
+    width: 150px;
+  }
+
+  .result {
+    .item;
+
+    border-bottom: #cccccc 1px solid;
+    padding-bottom: 2px;
+  }
+}
+
+.downloadButton {
+  margin-left: 5px;
+}
+
+.complex {
+  .emulate {
+    padding: 10px;
+
+    .tag {
+      margin: 10px;
+    }
+
+    .selectFund {
+      width: 100%;
+    }
+
+    .selectedFundWrapper {
+      margin-top: 10px;
+    }
+
+    .selectedFund {
+      text-align: right;
+    }
+
+    .submitButton {
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .riseTo {
+      margin-top: 10px;
+      text-align: right;
+      width: 200px;
+    }
+  }
+}

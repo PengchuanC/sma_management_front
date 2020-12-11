@@ -16,6 +16,7 @@ import {
   LogoutOutlined,
   HistoryOutlined,
   FundOutlined,
+  DotChartOutlined,
 } from '@ant-design/icons';
 import './index.less';
 import logo from '@/assets/images/logoNew.png';
@@ -142,7 +143,7 @@ class MainLayout extends React.Component {
                 <Menu.Item key="4" icon={<HistoryOutlined />}>
                   投资记录
                 </Menu.Item>
-                <Menu.Item key="5" icon={<HistoryOutlined />}>
+                <Menu.Item key="5" icon={<DotChartOutlined />}>
                   模拟投资
                 </Menu.Item>
               </Menu.SubMenu>

@@ -11,6 +11,7 @@
   padding-left: 5px;
   padding-right: 5px;
   padding-top: 15px;
+  overflow-y: auto;
 }
 
 .statisticCard {
@@ -19,16 +20,36 @@
   margin-right: 5px;
 }
 
-.dropdown {
-  height: 30px;
-  margin: 15px 5px 5px 0;
-}
-
 .table {
-  // 100px statisticCard 50ox Dropdown 5px bottomMargin
-  height: calc(100% - 100px - 50px - 5px);
+  height: 100%;
   width: 100%;
   overflow-x: hidden;
   overflow-y: auto;
   cursor: pointer;
+}
+
+.capitalTable {
+  margin-top: 10px;
+}
+
+.announcement {
+  margin: 0 5px;
+
+  .listItem {
+    padding: 10px 0;
+    cursor: pointer;
+  }
+
+  .expanded {
+    cursor: pointer;
+  }
+}
+
+.announceContent {
+  white-space: pre-wrap;
+}
+
+.announceContent:first-child {
+  font-size: 16px;
+  font-weight: bold;
 }

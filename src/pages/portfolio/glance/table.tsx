@@ -1,6 +1,5 @@
 import React from 'react';
 import { Table } from 'antd';
-import numeral from 'numeral';
 import './list.less';
 import { history } from 'umi';
 import { PortfolioContext } from '@/common/localstorage';
@@ -81,7 +80,10 @@ export default class PortfolioTable extends React.Component {
         dataIndex: 'launch_date',
         key: 'launch_date',
         align: 'center',
-        sorter: (a: record, b: record) => a.launch_date > b.launch_date,
+        sorter: (a: record, b: record) => {
+          if (a.launch_date > b.launch_date) return 1;
+          else return -1;
+        },
       },
       {
         title: '最新净值日',
@@ -137,18 +139,6 @@ export default class PortfolioTable extends React.Component {
         key: 'cash',
         align: 'right',
         render: (text: any, record: record) => numeralNum(record.cash),
-      },
-      {
-        title: '盘中估值',
-        dataIndex: 'value',
-        key: 'value',
-        align: 'right',
-      },
-      {
-        title: 'FA',
-        dataIndex: 'fa',
-        key: 'fa',
-        align: 'right',
       },
     ];
     return (

@@ -50,3 +50,56 @@ interface contributeType {
   alter: number,
   money: number,
 }
+
+// 组合持仓基金数据
+interface holdingFundType {
+  key: number,
+  secucode: string,
+  secuname?: string,
+  mkt_cap?: number,
+  ratio: number,
+  day: number,
+  week: number,
+  month: number,
+  quarter: number,
+  half_year: number,
+  year: number,
+  ytd: number,
+  apply_type: string,
+  redeem_type: string,
+  min_apply: number,
+  max_apply: number
+}
+
+
+// 基金持股
+interface holdingStockType {
+  key: number,
+  stockcode: string,
+  stockname: string,
+  ratio: number
+}
+
+// 行业占比
+interface industryType {
+  key: number,
+  firstindustryname: string,
+  ratio: number,
+  ratioinequity: number
+}
+
+
+// 组合风格
+interface styleType {
+  id: number,
+  port_code: string,
+  small_value: number,
+  small_growth: number,
+  mid_value: number,
+  mid_growth: number,
+  large_value: number,
+  large_growth: number,
+  bond: number,
+  r_square: number,
+  date: string
+}

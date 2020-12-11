@@ -3,8 +3,8 @@
  */
 
 import React from 'react';
-import MVO from '@/pages/allocate/allocate';
+import BackTest from '@/pages/allocate/backtest';
 
 export default function() {
-  return <MVO />;
+  return <BackTest />;
 }

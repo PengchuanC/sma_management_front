@@ -4,17 +4,16 @@ import 'moment/locale/zh-cn';
 import BreadCrumb, { routes } from '@/common/breadcrumb';
 import styles from './history.less';
 import { Row, Col, Card, Statistic, Table } from 'antd';
-import { CustomDropdown } from '../../glance/index'
+import CustomDropdown, { dropdownType } from '@/common/dropdown';
 import api from '@/common/http';
 import HistoryTable from '@/pages/portfolio/[portcode$]/history/table';
 
-class HistoryDropdown extends CustomDropdown {
-  items = [
-    // comp需要在子组件定制并引入到此处
-    { id: 0, name: '交易明细', comp: <HistoryTable /> },
-    { id: 1, name: '调仓贡献', comp: <div>调仓贡献</div> },
-  ]
-}
+
+const items: Array<dropdownType> = [
+  // comp需要在子组件定制并引入到此处
+  { id: 0, name: '交易明细', comp: <HistoryTable /> },
+  { id: 1, name: '调仓贡献', comp: <div>调仓贡献</div> },
+]
 
 
 export default class Overview extends React.Component<any, any> {
@@ -89,7 +88,7 @@ class HistoryLayout extends React.Component<any, any>{
             </Card>
           </Col>
         </Row>
-        <HistoryDropdown />
+        <CustomDropdown items={items} />
       </>
     );
   }
