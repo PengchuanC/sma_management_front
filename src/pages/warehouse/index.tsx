@@ -14,7 +14,7 @@ const breads: routes = [
 
 const dropdownItems: Array<dropdownType> = [
   { id: 0, name: '费用计算', comp: <Calculator /> },
-  { id: 1, name: '调仓试算', comp: <Complex /> },
+  { id: 1, name: '模拟投资', comp: <Complex /> },
 ];
 
 export default class WareHouse extends React.Component<any, any> {

@@ -76,7 +76,7 @@ export default class FullScreenAnnouncement extends React.Component<any, any> {
           headStyle={{
             fontSize: '14px',
             padding: '0 20px',
-            backgroundColor: '#e6f7ff',
+            backgroundColor: '#fafafa',
           }}
           bodyStyle={{ padding: '0 10px' }}
           title="基金公告"

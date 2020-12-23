@@ -12,7 +12,7 @@ import HistoryTable from '@/pages/portfolio/[portcode$]/history/table';
 const items: Array<dropdownType> = [
   // comp需要在子组件定制并引入到此处
   { id: 0, name: '交易明细', comp: <HistoryTable /> },
-  { id: 1, name: '调仓贡献', comp: <div>调仓贡献</div> },
+  // { id: 1, name: '调仓贡献', comp: <div>调仓贡献</div> },
 ]
 
 

@@ -61,6 +61,87 @@ export default class BackTest extends React.Component<any, any> {
   }
 }
 
+export const columns2: Array<Object> | [] = [
+  {
+    title: '组合名称',
+    dataIndex: 'index',
+    key: 'index',
+    align: 'left',
+  },
+  {
+    title: '累计收益',
+    dataIndex: 'acc_return_yield',
+    key: 'acc_return_yield',
+    align: 'right',
+    render: (text: any, r: backtestPerfType) =>
+      formatPercent(r.acc_return_yield),
+  },
+  {
+    title: '年化收益',
+    dataIndex: 'annualized_return_yield',
+    key: 'annualized_return_yield',
+    align: 'right',
+    render: (text: any, r: backtestPerfType) =>
+      formatPercent(r.annualized_return_yield),
+  },
+  {
+    title: '年化波动',
+    dataIndex: 'vol',
+    key: 'vol',
+    align: 'right',
+    render: (text: any, r: backtestPerfType) => formatPercent(r.vol),
+  },
+  {
+    title: '下行波动',
+    dataIndex: 'downside_vol',
+    key: 'downside_vol',
+    align: 'right',
+    render: (text: any, r: backtestPerfType) => formatPercent(r.downside_vol),
+  },
+  {
+    title: '最大回撤',
+    dataIndex: 'max_drawback',
+    key: 'max_drawback',
+    align: 'right',
+    render: (text: any, r: backtestPerfType) => formatPercent(r.max_drawback),
+  },
+  {
+    title: '夏普',
+    dataIndex: 'sharpe_ratio',
+    key: 'sharpe_ratio',
+    align: 'right',
+    render: (text: any, r: backtestPerfType) => r.sharpe_ratio.toFixed(2),
+  },
+  {
+    title: '索提诺',
+    dataIndex: 'sortino_ratio',
+    key: 'sortino_ratio',
+    align: 'right',
+    render: (text: any, r: backtestPerfType) => r.sortino_ratio.toFixed(2),
+  },
+  {
+    title: '卡玛',
+    dataIndex: 'calmar_ratio',
+    key: 'calmar_ratio',
+    align: 'right',
+    render: (text: any, r: backtestPerfType) => r.calmar_ratio.toFixed(2),
+  },
+  {
+    title: 'Var',
+    dataIndex: 'var',
+    key: 'var',
+    align: 'right',
+    render: (text: any, r: backtestPerfType) => formatPercent(r.var),
+  },
+  {
+    title: 'cVar',
+    dataIndex: 'cvar',
+    key: 'cvar',
+    align: 'right',
+    render: (text: any, r: backtestPerfType) => formatPercent(r.cvar),
+  },
+];
+
 class BackTestResult extends React.Component<any, any> {
   static contextType = BacktestContext;
 
@@ -231,88 +312,6 @@ class BackTestResult extends React.Component<any, any> {
         key: 'zcf',
         align: 'center',
         render: (text: any, r: backtestType) => formatNav(r.zcf),
-      },
-    ];
-    const columns2: Array<Object> | [] = [
-      {
-        title: '组合名称',
-        dataIndex: 'index',
-        key: 'index',
-        align: 'left',
-      },
-      {
-        title: '累计收益',
-        dataIndex: 'acc_return_yield',
-        key: 'acc_return_yield',
-        align: 'right',
-        render: (text: any, r: backtestPerfType) =>
-          formatPercent(r.acc_return_yield),
-      },
-      {
-        title: '年化收益',
-        dataIndex: 'annualized_return_yield',
-        key: 'annualized_return_yield',
-        align: 'right',
-        render: (text: any, r: backtestPerfType) =>
-          formatPercent(r.annualized_return_yield),
-      },
-      {
-        title: '年化波动',
-        dataIndex: 'vol',
-        key: 'vol',
-        align: 'right',
-        render: (text: any, r: backtestPerfType) => formatPercent(r.vol),
-      },
-      {
-        title: '下行波动',
-        dataIndex: 'downside_vol',
-        key: 'downside_vol',
-        align: 'right',
-        render: (text: any, r: backtestPerfType) =>
-          formatPercent(r.downside_vol),
-      },
-      {
-        title: '最大回撤',
-        dataIndex: 'max_drawback',
-        key: 'max_drawback',
-        align: 'right',
-        render: (text: any, r: backtestPerfType) =>
-          formatPercent(r.max_drawback),
-      },
-      {
-        title: '夏普',
-        dataIndex: 'sharpe_ratio',
-        key: 'sharpe_ratio',
-        align: 'right',
-        render: (text: any, r: backtestPerfType) => r.sharpe_ratio.toFixed(2),
-      },
-      {
-        title: '索提诺',
-        dataIndex: 'sortino_ratio',
-        key: 'sortino_ratio',
-        align: 'right',
-        render: (text: any, r: backtestPerfType) => r.sortino_ratio.toFixed(2),
-      },
-      {
-        title: '卡玛',
-        dataIndex: 'calmar_ratio',
-        key: 'calmar_ratio',
-        align: 'right',
-        render: (text: any, r: backtestPerfType) => r.calmar_ratio.toFixed(2),
-      },
-      {
-        title: 'Var',
-        dataIndex: 'var',
-        key: 'var',
-        align: 'right',
-        render: (text: any, r: backtestPerfType) => formatPercent(r.var),
-      },
-      {
-        title: 'cVar',
-        dataIndex: 'cvar',
-        key: 'cvar',
-        align: 'right',
-        render: (text: any, r: backtestPerfType) => formatPercent(r.cvar),
       },
     ];
     return (

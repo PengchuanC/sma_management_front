@@ -103,3 +103,23 @@ interface styleType {
   r_square: number,
   date: string
 }
+
+// 组合季度账户变化
+interface accountChangeType {
+  date: string,
+  s: number,
+  c: number
+}
+
+
+// 组合营收概况
+interface profitType {
+  profit: {
+    up: number,
+    down: number
+  },
+  count: {
+    up: number,
+    down: number
+  }
+}

@@ -69,8 +69,8 @@ class MainLayout extends React.Component {
     2: { name: '账户总览', path: '/portfolio/:id/overview' },
     3: { name: '投资分析', path: '/portfolio/:id/analysis' },
     4: { name: '投资记录', path: '/portfolio/:id/history' },
-    5: { name: '模拟投资', path: '/portfolio/:id/mock' },
-    6: { name: '调仓试算', path: '/warehouse' },
+    5: { name: '调仓贡献', path: '/portfolio/:id/mock' },
+    6: { name: '模拟投资', path: '/warehouse' },
     7: { name: '资产配置', path: '/allocate' },
     8: { name: '问卷分析', path: '/questionnaire' },
   };
@@ -144,11 +144,11 @@ class MainLayout extends React.Component {
                   投资记录
                 </Menu.Item>
                 <Menu.Item key="5" icon={<DotChartOutlined />}>
-                  模拟投资
+                  调仓贡献
                 </Menu.Item>
               </Menu.SubMenu>
               <Menu.Item key="6" icon={<PercentageOutlined />}>
-                调仓试算
+                模拟投资
               </Menu.Item>
               <Menu.Item key="7" icon={<FunctionOutlined />}>
                 资产配置

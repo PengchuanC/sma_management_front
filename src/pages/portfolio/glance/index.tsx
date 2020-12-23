@@ -11,6 +11,7 @@ import api from '@/common/http';
 import CustomDropdown, { dropdownType } from '@/common/dropdown';
 import CapitalAnalyze from '@/pages/portfolio/glance/capital';
 import Announcement from '@/pages/portfolio/glance/announcement';
+import AccountAnalysis from '@/pages/portfolio/glance/account';
 
 function PortfolioInfo() {
   return (
@@ -30,7 +31,7 @@ function PortfolioInfo() {
 const items: Array<dropdownType> = [
   { id: 0, name: '组合信息', comp: <PortfolioInfo /> },
   { id: 1, name: '资金分析', comp: <CapitalAnalyze /> },
-  { id: 2, name: '账户分析', comp: <div>账户分析</div> },
+  { id: 2, name: '账户分析', comp: <AccountAnalysis /> },
 ];
 
 export default class Glance extends React.Component<any, any> {
