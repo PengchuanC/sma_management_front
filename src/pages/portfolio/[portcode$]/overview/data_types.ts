@@ -18,3 +18,20 @@ interface changeType {
   name: string,
   value: number
 }
+
+// 客户问卷摘要
+interface questionType {
+  id?: number,
+  port_code?: string,
+  risk?: string,
+  maturity?: string,
+  arr?: string,
+  volatility?: string,
+  fluidity?: string,
+  age?: number,
+  experience?: string,
+  plan?: string,
+  tolerance?: string,
+  alter_limit?: string,
+  cross_border_limit?: string
+}
