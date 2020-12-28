@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col, Table } from 'antd';
+import { Row, Col, Table, Spin } from 'antd';
 import style from './allocate.less';
 import BreadCrumb from '@/common/breadcrumb';
 import { routes } from '@/common/breadcrumb';
@@ -43,6 +43,7 @@ export default class BackTest extends React.Component<any, any> {
   items: Array<dropdownType> = [
     { id: 0, name: '回测结果', comp: <BackTestResult /> },
     { id: 1, name: '指数权重', comp: <Weight /> },
+    { id: 2, name: '指数回测', comp: <IndexBackTestResult /> },
   ];
 
   render() {
@@ -142,25 +143,32 @@ export const columns2: Array<Object> | [] = [
   },
 ];
 
-class BackTestResult extends React.Component<any, any> {
+class BaseBackTestResult extends React.Component<any, any> {
   static contextType = BacktestContext;
 
   state = {
     nav: [],
     perf: [],
     date: moment(new Date()),
+    loading: true,
   };
 
   ref: React.RefObject<any> = React.createRef();
 
-  fetchData = () => {
+  public fetchData = () => {
+    this.setState({ loading: true });
     http
       .get('/backtest/', {
         params: { date: this.context.date.format('YYYY-MM-DD') },
       })
       .then(r => {
         this.showChart(r.nav);
-        this.setState({ nav: r.nav, perf: r.perf, date: this.context.date });
+        this.setState({
+          nav: r.nav,
+          perf: r.perf,
+          date: this.context.date,
+          loading: false,
+        });
       });
   };
 
@@ -246,7 +254,7 @@ class BackTestResult extends React.Component<any, any> {
     }
   }
 
-  render() {
+  doRender = () => {
     const columns: Array<Object> | [] = [
       {
         title: '序号',
@@ -348,5 +356,29 @@ class BackTestResult extends React.Component<any, any> {
         </Col>
       </Row>
     );
+  };
+}
+
+class BackTestResult extends BaseBackTestResult {
+  render() {
+    return this.doRender();
+  }
+}
+
+class IndexBackTestResult extends BaseBackTestResult {
+  fetchData = () => {
+    http
+      .get('/backtest/index/', {
+        params: { date: this.context.date.format('YYYY-MM-DD') },
+        timeout: 100000,
+      })
+      .then(r => {
+        this.showChart(r.nav);
+        this.setState({ nav: r.nav, perf: r.perf, date: this.context.date });
+      });
+  };
+
+  render() {
+    return this.doRender();
   }
 }
