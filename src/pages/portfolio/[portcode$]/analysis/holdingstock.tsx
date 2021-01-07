@@ -70,6 +70,22 @@ export default class HoldingStock extends React.Component<any, any> {
         render: (text: any, record: holdingStockType) => formatPercent(record.ratio),
         sorter: (a: holdingStockType, b: holdingStockType) => a.ratio - b.ratio,
       },
+      {
+        title: '占净值比累计',
+        dataIndex: 'ratio',
+        key: 'ratio',
+        align: 'right',
+        render: (text: any, record: holdingStockType) => formatPercent(record.cumsum),
+        sorter: (a: holdingStockType, b: holdingStockType) => a.cumsum - b.cumsum,
+      },
+      {
+        title: '占权益比',
+        dataIndex: 'ofnv',
+        key: 'ofnv',
+        align: 'right',
+        render: (text: any, record: holdingStockType) => formatPercent(record.ofnv),
+        sorter: (a: holdingStockType, b: holdingStockType) => a.ofnv - b.ofnv,
+      },
       ]
     const columns2: Array<Object> | [] = [
       {

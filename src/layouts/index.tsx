@@ -11,7 +11,6 @@ import {
   PercentageOutlined,
   FunctionOutlined,
   ExperimentOutlined,
-  FileWordOutlined,
   CommentOutlined,
   LogoutOutlined,
   HistoryOutlined,

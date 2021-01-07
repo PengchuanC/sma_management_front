@@ -74,7 +74,7 @@ class HistoryLayout extends React.Component<any, any>{
           </Col>
           <Col>
             <Card className={styles.statisticCard}>
-              <Statistic title="占基金资产比例" value={this.state.statistic.total.ratio * 10000} suffix={'‱'} precision={2} />
+              <Statistic title="占基金资产比例" value={this.state.statistic.total.ratio * 100} suffix={'%'} precision={2} />
             </Card>
           </Col>
           <Col offset={1}>

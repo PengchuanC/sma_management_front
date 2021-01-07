@@ -8,9 +8,14 @@ export default class NavChart extends React.Component<any, any> {
 
   ref: React.RefObject<any> = React.createRef()
 
+  state = {
+    base: ''
+  }
+
   fetchData = ()=>{
     http.get('/overview/', {params:{portCode: this.props.portCode}}).then(r=>{
-      this.showChart(r)
+      this.showChart(r.data)
+      this.setState({base: r.base})
     })
   }
 
@@ -80,7 +85,8 @@ export default class NavChart extends React.Component<any, any> {
   render() {
     return (
       <div className={styles.chartWrapper}>
-        <div className={styles.chart} ref={this.ref} />
+        <div className={styles.chartWithEx} ref={this.ref} />
+        <p className={styles.chartEx}>基准：{this.state.base}</p>
       </div>
     );
   }

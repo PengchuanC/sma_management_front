@@ -3,7 +3,6 @@ import BreadCrumb, { routes } from '@/common/breadcrumb';
 import styles from './mock.less';
 import { Button, Table, Card, Select, Row, Col, Statistic } from 'antd';
 import http from '@/common/http';
-import { formatPercent } from '@/common/util';
 import {columns2} from '@/pages/allocate/backtest';
 import echarts from 'echarts';
 
@@ -25,7 +24,8 @@ export default class Overview extends React.Component<any, any> {
     selectedDate: '',
     detail: [],
     perf: [],
-    nav: {}
+    nav: [],
+    last: ''
   }
 
   ref: React.RefObject<any> = React.createRef();
@@ -58,7 +58,7 @@ export default class Overview extends React.Component<any, any> {
     this.setState({loading: true})
     http.get('/mock/', {params:{portCode: this.state.portCode, date: this.state.selectedDate}}).then(r=>{
       this.showChart(r.data)
-      this.setState({nav: r.data, loading: false, perf: r.perf})
+      this.setState({nav: r.data, loading: false, perf: r.perf, last: r.last})
     })
   }
 
@@ -180,6 +180,7 @@ export default class Overview extends React.Component<any, any> {
           >
             <div ref={this.ref} className={styles.chart} />
           </Card>
+          <p>截至: {this.state.last}</p>
         </div>
       </>
     )

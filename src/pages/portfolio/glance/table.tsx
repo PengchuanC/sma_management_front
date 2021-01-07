@@ -140,6 +140,13 @@ export default class PortfolioTable extends React.Component {
         align: 'right',
         render: (text: any, record: record) => numeralNum(record.cash),
       },
+      {
+        title: 'FA',
+        dataIndex: 'fa',
+        key: 'fa',
+        align: 'right',
+        render: (text: any, record: record) => record.fa,
+      },
     ];
     return (
       <Table

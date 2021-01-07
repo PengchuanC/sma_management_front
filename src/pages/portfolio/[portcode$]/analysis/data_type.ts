@@ -77,7 +77,9 @@ interface holdingStockType {
   key: number,
   stockcode: string,
   stockname: string,
-  ratio: number
+  ratio: number,
+  ofnv: number,
+  cumsum: number
 }
 
 // 行业占比

@@ -214,9 +214,10 @@ class PerformanceChart extends React.Component<any, any> {
   }
 
   ref: React.RefObject<any> = React.createRef()
+  ref2: React.RefObject<any> = React.createRef()
 
-  showChart = (data: contributeType) =>{
-    const chart: any = echarts.init(this.ref.current);
+  showChart = (data: contributeType, ref: React.RefObject<any>, type: string) =>{
+    const chart: any = echarts.init(ref.current);
     let options: any = {
       tooltip: {
         trigger: 'item',
@@ -241,7 +242,7 @@ class PerformanceChart extends React.Component<any, any> {
         splitLine: {
           show: false
         },
-        name: '单位：%',
+        name: `${type},单位：%`,
         nameLocation: 'end'
       },
       series: [{
@@ -271,7 +272,8 @@ class PerformanceChart extends React.Component<any, any> {
     http.get('/analysis/attribute/', {
       params:{portCode: this.props.portCode, date: this.context.date.format('YYYY-MM-DD')}
     }).then(r=>{
-      this.showChart(r)
+      this.showChart(r.data, this.ref, '累计')
+      this.showChart(r.week, this.ref2, '当周')
       this.setState({})
     }).catch(e=>{
       warning()
@@ -296,6 +298,7 @@ class PerformanceChart extends React.Component<any, any> {
         <div className={style.performance}>
           <Button className={style.button}>组合业绩贡献</Button>
           <div className={style.chart} ref={this.ref} />
+          <div className={style.chart} ref={this.ref2} />
         </div>
       </>
     );

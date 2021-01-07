@@ -12,6 +12,7 @@ import CustomDropdown, { dropdownType } from '@/common/dropdown';
 import CapitalAnalyze from '@/pages/portfolio/glance/capital';
 import Announcement from '@/pages/portfolio/glance/announcement';
 import AccountAnalysis from '@/pages/portfolio/glance/account';
+import PurchaseAndRansom from '@/pages/portfolio/glance/pr';
 
 function PortfolioInfo() {
   return (
@@ -32,6 +33,7 @@ const items: Array<dropdownType> = [
   { id: 0, name: '组合信息', comp: <PortfolioInfo /> },
   { id: 1, name: '资金分析', comp: <CapitalAnalyze /> },
   { id: 2, name: '账户分析', comp: <AccountAnalysis /> },
+  { id: 3, name: '申赎分析', comp: <PurchaseAndRansom /> },
 ];
 
 export default class Glance extends React.Component<any, any> {
@@ -44,11 +46,12 @@ export default class Glance extends React.Component<any, any> {
     num: 0,
     total: 0,
     avg: 0,
+    last: '',
   };
 
   fetchData() {
     api.get('/basic/all/').then(r => {
-      this.setState({ num: r.num, total: r.total, avg: r.avg });
+      this.setState({ num: r.num, total: r.total, avg: r.avg, last: r.last });
     });
   }
 
@@ -85,6 +88,11 @@ export default class Glance extends React.Component<any, any> {
                   value={this.state.avg}
                   precision={2}
                 />
+              </Card>
+            </Col>
+            <Col span={4}>
+              <Card className={styles.statisticCard}>
+                <Statistic title="最新日期" value={this.state.last} />
               </Card>
             </Col>
           </Row>

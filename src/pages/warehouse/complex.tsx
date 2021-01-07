@@ -117,7 +117,13 @@ export default class Complex extends React.Component<any, any> {
   // 检查输入转换比例是否超限
   check2 = (e: any) => {
     let target = Number(e.target.value);
-    this.setState({ rise: target });
+    // @ts-ignore
+    let max: number = sum(this.state.sell2.map(x => Number(x.ratio)));
+    if (target / 100 > max) {
+      message.error('调整后的仓位超过了当前持仓，请重新设置');
+      target = max * 100;
+    }
+    this.setState({ rise: Number(target.toFixed(2)) });
   };
 
   onFinish = () => {
@@ -415,6 +421,12 @@ class ChangeResult extends React.Component<any, any> {
         align: 'center',
       },
       {
+        title: '基金名称',
+        dataIndex: 'secuname',
+        key: 'secuname',
+        align: 'center',
+      },
+      {
         title: '交易方向',
         dataIndex: 'operate',
         key: 'operate',
@@ -447,4 +459,12 @@ class ChangeResult extends React.Component<any, any> {
       />
     );
   }
+}
+
+function sum(arr: Array<number>) {
+  let s = 0;
+  for (let i = arr.length - 1; i >= 0; i--) {
+    s += arr[i];
+  }
+  return s;
 }

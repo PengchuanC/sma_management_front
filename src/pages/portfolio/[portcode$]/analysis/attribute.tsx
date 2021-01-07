@@ -4,7 +4,7 @@
 * */
 
 import React from 'react';
-import { Card } from 'antd';
+import { Card, Row, Col } from 'antd';
 import styles from './analysis.less';
 import { AnalysisTabContext } from '@/common/localstorage';
 import echarts from 'echarts';
@@ -34,9 +34,15 @@ export default class Attribute extends React.Component<any, any> {
     return (
       <>
       <div className={styles.attribute} style={{height: windowHeight}}>
-        <StyleCard portCode={this.state.portCode} date={this.state.date} />
-        <ExposureCard portCode={this.state.portCode} date={this.state.date} />
-        <BrinsonCard portCode={this.state.portCode} date={this.state.date} />
+        <Row>
+          <Col span={12}>
+            <BrinsonCard portCode={this.state.portCode} date={this.state.date} />
+          </Col>
+          <Col span={12}>
+            <StyleCard portCode={this.state.portCode} date={this.state.date} />
+            <ExposureCard portCode={this.state.portCode} date={this.state.date} />
+          </Col>
+        </Row>
       </div>
       </>
     );
@@ -369,9 +375,9 @@ class BrinsonCard extends React.Component<any, any> {
       <Card
       title='归因分析'
       size={'small'}
-      className={styles.card}
+      className={styles.card2xHeight}
     >
-      <div ref={this.ref} className={styles.chart} />
+      <div ref={this.ref} className={styles.chart2xHeight} />
     </Card>
   );
   }
