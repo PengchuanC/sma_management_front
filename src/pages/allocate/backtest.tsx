@@ -156,7 +156,7 @@ class BaseBackTestResult extends React.Component<any, any> {
   ref: React.RefObject<any> = React.createRef();
 
   public fetchData = () => {
-    this.setState({ loading: true });
+    this.setState({ loading: true, date: this.context.date });
     http
       .get('/backtest/', {
         params: { date: this.context.date.format('YYYY-MM-DD') },
@@ -166,7 +166,6 @@ class BaseBackTestResult extends React.Component<any, any> {
         this.setState({
           nav: r.nav,
           perf: r.perf,
-          date: this.context.date,
           loading: false,
         });
       });
@@ -367,6 +366,7 @@ class BackTestResult extends BaseBackTestResult {
 
 class IndexBackTestResult extends BaseBackTestResult {
   fetchData = () => {
+    this.setState({ date: this.context.date });
     http
       .get('/backtest/index/', {
         params: { date: this.context.date.format('YYYY-MM-DD') },

@@ -16,6 +16,7 @@ import {
   HistoryOutlined,
   FundOutlined,
   DotChartOutlined,
+  FieldNumberOutlined,
 } from '@ant-design/icons';
 import './index.less';
 import logo from '@/assets/images/logoNew.png';
@@ -71,7 +72,7 @@ class MainLayout extends React.Component {
     5: { name: '调仓贡献', path: '/portfolio/:id/mock' },
     6: { name: '模拟投资', path: '/warehouse' },
     7: { name: '资产配置', path: '/allocate' },
-    // 8: { name: '问卷分析', path: '/questionnaire' },
+    8: { name: '资金流向', path: '/capitalflow' },
   };
 
   toggle = () => {
@@ -152,9 +153,9 @@ class MainLayout extends React.Component {
               <Menu.Item key="7" icon={<FunctionOutlined />}>
                 资产配置
               </Menu.Item>
-              {/*<Menu.Item key="8" icon={<FileWordOutlined />}>*/}
-              {/*  问卷分析*/}
-              {/*</Menu.Item>*/}
+              <Menu.Item key="8" icon={<FieldNumberOutlined />}>
+                资金流向
+              </Menu.Item>
               <Menu.Divider />
               <Menu.SubMenu key="s2" icon={<ExperimentOutlined />} title="其他">
                 <Menu.Item key="9" icon={<CommentOutlined />}>
