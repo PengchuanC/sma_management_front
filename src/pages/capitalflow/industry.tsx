@@ -62,7 +62,7 @@ export default class Industry extends React.Component<any, any> {
         left: 'center',
         top: 'top',
       },
-      color: ['#749f83', '#ca8622', '#c23531', '#61a0a8', '#91c7ae', '#749f83'],
+      color: ['#749f83', '#91c7ae', '#c23531', '#61a0a8', '#ca8622', '#749f83'],
       xAxis: {
         type: 'category',
         data: data.map((x: { date: any }) => x.date),

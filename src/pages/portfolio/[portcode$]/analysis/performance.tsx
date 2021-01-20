@@ -96,7 +96,7 @@ class PerformanceTable extends React.Component<any, any> {
                 <th>业绩指标</th>
                 <th>指标</th>
                 <th>组合</th>
-                <th>基准</th>
+                <th>参考</th>
               </tr>
               <tr>
                 <td rowSpan={6}>收益指标</td>
