@@ -23,7 +23,7 @@ export default class Overview extends React.Component<any, any> {
   ]
 
   render() {
-    const {portcode} = this.props.match.params
+    const {portcode} = this.props.match.params || localStorage.getItem('portCode') || 'SA5001'
     return (
       <>
         <div className={styles.breadcrumb}>

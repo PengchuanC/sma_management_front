@@ -48,6 +48,7 @@ export default class PortfolioTable extends React.Component {
 
   handleClick = (portcode: string) => {
     this.context.setPortCode(portcode);
+    localStorage.setItem('portCode', portcode);
     history.push(portcode + '/overview');
   };
 

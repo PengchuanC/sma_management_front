@@ -73,6 +73,7 @@ class MainLayout extends React.Component {
     6: { name: '模拟投资', path: '/warehouse' },
     7: { name: '资产配置', path: '/allocate' },
     8: { name: '资金流向', path: '/capitalflow' },
+    9: { name: '数据同步', path: '/tools' },
   };
 
   toggle = () => {
@@ -159,10 +160,10 @@ class MainLayout extends React.Component {
               <Menu.Divider />
               <Menu.SubMenu key="s2" icon={<ExperimentOutlined />} title="其他">
                 <Menu.Item key="9" icon={<CommentOutlined />}>
-                  客户问答
+                  数据同步
                 </Menu.Item>
                 <Menu.Item key="10" icon={<UserOutlined />}>
-                  用户
+                  <a href={'/management/admin'}>后台站点</a>
                 </Menu.Item>
               </Menu.SubMenu>
             </Menu>

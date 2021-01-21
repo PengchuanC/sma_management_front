@@ -22,6 +22,7 @@ export default class Overview extends React.Component<any, any> {
   static contextType = PortfolioContext
 
   componentDidMount() {
+    let portCode = this.props.match.params.portcode || localStorage.getItem('portCode') || 'SA5001'
     http.get('/overview/questionnairy/', {
       params:{portCode: this.props.match.params.portcode}
     }).then(r=>{
