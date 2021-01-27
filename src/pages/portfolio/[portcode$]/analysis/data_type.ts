@@ -19,6 +19,14 @@ interface performanceType {
     p: {start: string, end: string, drawback: number},
     b: {start: string, end: string, drawback: number}
   },
+  ucr: {
+    p: number,
+    b?: number
+  },
+  dcr: {
+    p: number,
+    b?: number
+  },
   sharpe_ratio: {
     p: number,
     b: number

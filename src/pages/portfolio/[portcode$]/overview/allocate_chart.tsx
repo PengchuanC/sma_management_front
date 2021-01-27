@@ -1,15 +1,20 @@
 import React from 'react';
 import echarts from 'echarts';
+import { DatePicker, Space } from 'antd';
 import http from '@/common/http';
 import numeral from 'numeral';
+import moment from 'moment';
 import styles from './overiew.less';
+
+
+const { RangePicker } = DatePicker;
 
 
 export default class AllocateChart extends React.Component<any, any> {
 
   protected ref: React.RefObject<any> = React.createRef()
 
-  private showChart = (data: Array<assetType>) => {
+  showChart = (data: Array<assetType>) => {
     const chart: echarts.ECharts = echarts.init(this.ref.current);
     let options: any = {
       tooltip: {
@@ -94,3 +99,41 @@ export default class AllocateChart extends React.Component<any, any> {
   }
 }
 
+
+export class AvgAllocate extends AllocateChart {
+
+  onDateRangeChange = (values: any, formatString: [string, string])=>{
+    let start = values[0]?.format('YYYY-MM-DD')
+    let end = values[1]?.format('YYYY-MM-DD')
+    http.get('/overview/allocate/avg/', {params: {portCode: this.props.portCode, start: start, end: end}}).then(r=>{
+      this.showChart(r.data)
+    })
+  }
+
+  fetchRangeData = (start: string, end: string)=>{
+    http.get('/overview/allocate/avg/', {params: {portCode: this.props.portCode, start: start, end: end}}).then(r=>{
+      this.showChart(r.data)
+    })
+  }
+
+  public componentDidMount() {
+    this.fetchRangeData('', '')
+  }
+
+  public render() {
+    return (
+      <div className={styles.chartWrapper}>
+        <div className={styles.pieChartWrapper}>
+          <div className={styles.pieChartFix}>
+            <div className={styles.pieChart} ref={this.ref} />
+          </div>
+          <div className={styles.pieChartNotify}>
+            <Space>
+              <RangePicker onChange={this.onDateRangeChange} />
+            </Space>
+          </div>
+        </div>
+      </div>
+    );
+  }
+}

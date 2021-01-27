@@ -1,5 +1,5 @@
 import React from 'react';
-import { Select, DatePicker, Card } from 'antd';
+import { Select, DatePicker, Card, Empty } from 'antd';
 import echarts from 'echarts';
 import moment from 'moment';
 import http from '@/common/http';
@@ -18,6 +18,7 @@ export default class Industry extends React.Component<any, any> {
     categories: [],
     slCategory: '',
     slDate: '',
+    show: true,
   };
 
   // 初始化时获取全部申万行业
@@ -34,6 +35,9 @@ export default class Industry extends React.Component<any, any> {
         params: { category: category, date: date },
       })
       .then(r => {
+        if (this.state.show) {
+          this.setState({ show: false });
+        }
         this.showChart(r);
       });
   };
@@ -192,11 +196,22 @@ export default class Industry extends React.Component<any, any> {
           placeholder="请选择区间尾日"
           onChange={this.onSelectDate}
         />
-        <Card size="small" className={styles.card} style={{ height: height }}>
+        <Card
+          size="small"
+          bordered={false}
+          className={styles.card}
+          style={{ height: height }}
+        >
           <div
             ref={this.ref}
             className={styles.chart}
             style={{ height: height }}
+          />
+          <Empty
+            className={this.state.show ? styles.empty : styles.emptyHide}
+            description={
+              <span className={styles.describe}>暂无数据，请选择行业</span>
+            }
           />
         </Card>
       </>

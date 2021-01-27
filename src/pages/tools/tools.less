@@ -1,0 +1,49 @@
+@import '../../layouts/index';
+
+.layoutContent {
+  height: 100%;
+  width: @contentWidth;
+}
+
+.contentArea {
+  height: calc(100% - @breadCrumbHeight);
+  background-color: white;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 10px;
+
+  .tools {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+
+  .cardWrapper {
+    width: 300px;
+    height: 250px;
+    border: #c2c8d5 1px solid;
+    box-shadow: #c2c8d5;
+    margin: 5px;
+
+    .cardTitle {
+      width: 100%;
+      text-align: center;
+      height: 40px;
+      border-bottom: 1px silver solid;
+
+      h3 {
+        line-height: 38px;
+      }
+    }
+
+    .cardBody {
+      display: flex;
+      width: 100%;
+      height: 210px;
+      padding: 5px 2%;
+      text-align: left;
+      flex-direction: column;
+      justify-content: space-around;
+    }
+  }
+}

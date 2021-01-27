@@ -15,6 +15,8 @@ let performance: performanceType = {
   cvar: { b: 0, p: 0 },
   daily_change: { b: { max: 0, mean: 0, min: 0, win_ratio: 0 }, p: { max: 0, mean: 0, min: 0, win_ratio: 0 } },
   max_drawback: { b: { drawback: 0, end: '', start: '' }, p: { drawback: 0, end: '', start: '' } },
+  dcr: {p: 0},
+  ucr: {p: 0},
   sharpe_ratio: { b: 0, p: 0 },
   sortino_ratio: { b: 0, p: 0 },
   trading_day_count: { b: { draw: 0, lose: 0, win: 0 }, p: { draw: 0, lose: 0, win: 0 } },
@@ -146,7 +148,7 @@ class PerformanceTable extends React.Component<any, any> {
                 <td>{d.trading_day_count.b.draw}</td>
               </tr>
               <tr>
-                <td rowSpan={5}>波动指标</td>
+                <td rowSpan={7}>波动指标</td>
                 <td>年化波动</td>
                 <td>{percent(d.annualized_volatility.p.vol)}</td>
                 <td>{percent(d.annualized_volatility.b.vol)}</td>
@@ -170,6 +172,16 @@ class PerformanceTable extends React.Component<any, any> {
                 <td>最大回撤</td>
                 <td>{percent(d.max_drawback.p.drawback)}</td>
                 <td>{percent(d.max_drawback.b.drawback)}</td>
+              </tr>
+              <tr>
+                <td>上行捕获率</td>
+                <td>{percent(d.ucr.p)}</td>
+                <td/>
+              </tr>
+              <tr>
+                <td>下行捕获率</td>
+                <td>{percent(d.dcr.p)}</td>
+                <td/>
               </tr>
               <tr>
                 <td rowSpan={3}>综合评价</td>

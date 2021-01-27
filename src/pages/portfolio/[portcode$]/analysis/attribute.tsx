@@ -43,6 +43,11 @@ export default class Attribute extends React.Component<any, any> {
             <ExposureCard portCode={this.state.portCode} date={this.state.date} />
           </Col>
         </Row>
+        <Row>
+          <Col span={12}>
+            <MovingVolatility portCode={this.state.portCode} date={this.state.date} />
+          </Col>
+        </Row>
       </div>
       </>
     );
@@ -234,7 +239,7 @@ class ExposureCard extends React.Component<any, any> {
   }
 
   componentDidMount() {
-    http.get('/analysis/expose/', {params:{portCode: this.props.portCode,date:  moment(this.props.date).format('YYYY-MM-DD')}}).then(r=>{
+    http.get('/analysis/expose/', {params:{portCode: this.props.portCode, date: moment(this.props.date).format('YYYY-MM-DD')}}).then(r=>{
       this.showChart(r)
     })
   }
@@ -380,5 +385,87 @@ class BrinsonCard extends React.Component<any, any> {
       <div ref={this.ref} className={styles.chart2xHeight} />
     </Card>
   );
+  }
+}
+
+
+class MovingVolatility extends React.Component<any, any> {
+  ref: React.RefObject<any> = React.createRef()
+
+  componentDidMount() {
+    http.get(
+      '/analysis/std/',
+      {
+        params:{portCode: this.props.portCode,
+          date: moment(this.props.date).format('YYYY-MM-DD')
+        }
+      }).then(r=>{
+        this.showChart(r)
+    }).catch(e=>{
+      console.log(e)
+    })
+  }
+
+  showChart = (data: Array<{date: string, acc_nav: number}>)=>{
+    const chart: any = echarts.init(this.ref.current);
+    let option = {
+      tooltip: {
+        trigger: 'item',
+      },
+      grid: {
+        left: 60,
+        top: 40,
+        bottom: 30,
+        right: 20
+      },
+      legend : {
+        show : true,
+        icon: 'line',
+        top: 10
+      },
+      textStyle: {
+        fontSize: 12
+      },
+      xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        splitLine: {
+          show: false
+        },
+        data: data.map(x=>x.date),
+      },
+      yAxis: {
+        type: 'value',
+        splitLine: {
+          show: false
+        },
+        nameLocation: 'end',
+        scale: true,
+        axisLabel: {
+          formatter: (value: number)=>{
+            return value.toFixed(1) + '%'
+          }
+        }
+      },
+      series: [
+        {
+          type: 'line',
+          data: data.map(x=>x.acc_nav),
+          name: '波动率'
+        }]
+    }
+    chart.setOption(option);
+  }
+
+  render() {
+    return (
+      <Card
+        title='30日滚动年化波动率'
+        size={'small'}
+        className={styles.card}
+      >
+        <div ref={this.ref} className={styles.chart} />
+      </Card>
+    );
   }
 }

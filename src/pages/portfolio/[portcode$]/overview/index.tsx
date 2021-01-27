@@ -4,7 +4,7 @@ import BreadCrumb, { routes } from '@/common/breadcrumb';
 import styles from './overiew.less';
 import { PortfolioContext } from '@/common/localstorage';
 import NavChart from './nav_chart';
-import AllocateChart from '@/pages/portfolio/[portcode$]/overview/allocate_chart';
+import AllocateChart, { AvgAllocate } from '@/pages/portfolio/[portcode$]/overview/allocate_chart';
 import ChangeMonitorChart from '@/pages/portfolio/[portcode$]/overview/change_monitor';
 import http from '@/common/http'
 
@@ -22,7 +22,7 @@ export default class Overview extends React.Component<any, any> {
   static contextType = PortfolioContext
 
   componentDidMount() {
-    let portCode = this.props.match.params.portcode || localStorage.getItem('portCode') || 'SA5001'
+    let portCode = this.props.match.params.portcode
     http.get('/overview/questionnairy/', {
       params:{portCode: this.props.match.params.portcode}
     }).then(r=>{
@@ -46,6 +46,12 @@ export default class Overview extends React.Component<any, any> {
                   <div className={styles.titleCard}>穿透资产配置</div>
                 </Card>
                 <AllocateChart portCode={portcode}/>
+              </div>
+              <div className={styles.rowArea}>
+                <Card className={styles.titleCardWrapper} bordered={false}>
+                  <div className={styles.titleCard}>区间平均配置</div>
+                </Card>
+                <AvgAllocate portCode={portcode}/>
               </div>
               <div className={styles.rowArea}>
                 <Card className={styles.titleCardWrapper} bordered={false}>
