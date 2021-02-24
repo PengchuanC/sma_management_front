@@ -24,6 +24,10 @@ export default class Overview extends React.Component<any, any> {
 
   render() {
     const {portcode} = this.props.match.params
+    let portName = localStorage.getItem('portName')
+    if (portName != null) {
+      this.routes.push({name: portName, route: ''})
+    }
     return (
       <>
         <div className={styles.breadcrumb}>

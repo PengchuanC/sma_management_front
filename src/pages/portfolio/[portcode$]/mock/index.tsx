@@ -132,6 +132,10 @@ export default class Overview extends React.Component<any, any> {
   }
 
   componentDidMount() {
+    let portName = localStorage.getItem('portName')
+    if (portName != null) {
+      this.routes.push({name: portName, route: ''})
+    }
     this.getDate()
   }
 

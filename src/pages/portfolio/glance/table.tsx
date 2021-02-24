@@ -8,6 +8,7 @@ import { numeralNum } from '@/common/util';
 
 interface record {
   key: string;
+  port_name: string;
   port_code: string;
   port_type: string;
   launch_date: string;
@@ -46,9 +47,10 @@ export default class PortfolioTable extends React.Component {
     return record.port_type === value;
   };
 
-  handleClick = (portcode: string) => {
+  handleClick = (portcode: string, portName: string) => {
     this.context.setPortCode(portcode);
     localStorage.setItem('portCode', portcode);
+    localStorage.setItem('portName', portName);
     history.push(portcode + '/overview');
   };
 
@@ -64,6 +66,12 @@ export default class PortfolioTable extends React.Component {
         dataIndex: 'port_code',
         key: 'port_code',
         align: 'center',
+      },
+      {
+        title: '产品名称',
+        dataIndex: 'port_name',
+        key: 'port_name',
+        align: 'left',
       },
       {
         title: '产品类型',
@@ -159,7 +167,7 @@ export default class PortfolioTable extends React.Component {
         className="table"
         onRow={(record: record) => {
           return {
-            onClick: () => this.handleClick(record.port_code),
+            onClick: () => this.handleClick(record.port_code, record.port_name),
           };
         }}
       />

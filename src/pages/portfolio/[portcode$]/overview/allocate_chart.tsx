@@ -14,13 +14,18 @@ export default class AllocateChart extends React.Component<any, any> {
 
   protected ref: React.RefObject<any> = React.createRef()
 
+  state = {
+    lever: 0
+  }
+
   showChart = (data: Array<assetType>) => {
     const chart: echarts.ECharts = echarts.init(this.ref.current);
     let options: any = {
       tooltip: {
         trigger: 'item',
+        formatter: '{b}: {d}%'
       },
-      color: ['#900000','#c00000', '#D18484', '#E0B5B5'],
+      color: ['#900000','#c00000', '#D18484', '#E0B5B5', '#FFB6C1'],
       textStyle: {
         fontSize: 12
       },
@@ -75,6 +80,7 @@ export default class AllocateChart extends React.Component<any, any> {
 
   fetchData = ()=>{
     http.get('/overview/allocate/', {params: {portCode: this.props.portCode}}).then(r=>{
+      this.setState({lever: r.lever})
       this.showChart(r.data)
     })
   }
@@ -92,6 +98,7 @@ export default class AllocateChart extends React.Component<any, any> {
           </div>
           <div className={styles.pieChartNotify}>
             <p>当前资产配置符合契约限制</p>
+            <p>当前杠杆比例为：{this.state.lever}</p>
           </div>
         </div>
       </div>

@@ -19,6 +19,15 @@ interface changeType {
   value: number
 }
 
+// 基金平均仓位
+interface avgPosType {
+  date: string,
+  normal_stock: number,
+  mix_stock: number,
+  mix_equal: number,
+  mix_flexible: number,
+}
+
 // 客户问卷摘要
 interface questionType {
   id?: number,

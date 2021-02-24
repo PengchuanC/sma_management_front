@@ -1,4 +1,4 @@
-# umi project
+# SMA management system front end server
 
 ## Getting Started
 
@@ -12,4 +12,11 @@ Start the dev server,
 
 ```bash
 $ yarn start
+```
+
+Build production
+
+```bash
+$ umi build
+
 ```

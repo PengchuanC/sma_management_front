@@ -263,6 +263,9 @@ class BrinsonCard extends React.Component<any, any> {
   ref: React.RefObject<any> = React.createRef()
 
   showChart = (data: any) => {
+    if (!!data) {
+      return
+    }
     let x1 = data.map((x: any)=>{return x.raa? x.raa.toFixed(4): 0});
     let max1 = Math.ceil(Math.max(...x1.map((x: any)=> {return Math.abs(x)}))*20)/20;
     let x2 = data.map((x: any)=>{return x.rss? x.rss.toFixed(4): 0});
@@ -406,7 +409,7 @@ class MovingVolatility extends React.Component<any, any> {
     })
   }
 
-  showChart = (data: Array<{date: string, acc_nav: number}>)=>{
+  showChart = (data: Array<{date: string, vol: number, downside_vol: number}>)=>{
     const chart: any = echarts.init(this.ref.current);
     let option = {
       tooltip: {
@@ -450,8 +453,12 @@ class MovingVolatility extends React.Component<any, any> {
       series: [
         {
           type: 'line',
-          data: data.map(x=>x.acc_nav),
+          data: data.map(x=>x.vol),
           name: '波动率'
+        },{
+          type: 'line',
+          data: data.map(x=>x.downside_vol),
+          name: '下行波动率'
         }]
     }
     chart.setOption(option);

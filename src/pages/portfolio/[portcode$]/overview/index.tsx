@@ -7,12 +7,13 @@ import NavChart from './nav_chart';
 import AllocateChart, { AvgAllocate } from '@/pages/portfolio/[portcode$]/overview/allocate_chart';
 import ChangeMonitorChart from '@/pages/portfolio/[portcode$]/overview/change_monitor';
 import http from '@/common/http'
+import AvgPosition from '@/pages/portfolio/[portcode$]/overview/avg_postion';
 
 
 export default class Overview extends React.Component<any, any> {
   routes: routes = [
     { name: '组合管理', route: '/portfolio' },
-    { name: '账户总览', route: '/portfolio/:id/overview' },
+    { name: '账户总览', route: '/portfolio/:id/overview' }
   ]
 
   state: {question: questionType} = {
@@ -22,7 +23,10 @@ export default class Overview extends React.Component<any, any> {
   static contextType = PortfolioContext
 
   componentDidMount() {
-    let portCode = this.props.match.params.portcode
+    let portName = localStorage.getItem('portName')
+    if (portName != null) {
+      this.routes.push({name: portName, route: ''})
+    }
     http.get('/overview/questionnairy/', {
       params:{portCode: this.props.match.params.portcode}
     }).then(r=>{
@@ -64,6 +68,12 @@ export default class Overview extends React.Component<any, any> {
                   <div className={styles.titleCard}>历史净值</div>
                 </Card>
                 <NavChart portCode={portcode} />
+              </div>
+              <div className={styles.rowArea}>
+                <Card className={styles.titleCardWrapper} bordered={false}>
+                  <div className={styles.titleCard}>基金平均仓位</div>
+                </Card>
+                <AvgPosition portCode={portcode} />
               </div>
             </Col>
             <Col span={10} className={styles.rightArea}>
