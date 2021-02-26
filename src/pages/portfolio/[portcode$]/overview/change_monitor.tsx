@@ -29,61 +29,7 @@ export default class ChangeMonitorChart extends React.Component<any, any> {
   }
 
   showChart = (data: Array<changeType>) => {
-    const chart: echarts.ECharts = echarts.init(this.ref.current);
-    let options: echarts.EChartOption = {
-      tooltip: {
-        trigger: 'axis',
-        axisPointer: {
-          animation: false
-        },
-        formatter: (params: any, ticket: string, callback: any) => {
-          let obj = params[0]
-          return `${obj.data[0]}: ${(obj.data[1] * 100).toFixed(2)}%`
-        }
-      },
-      grid: {
-        left: 60,
-        top: 40,
-        bottom: 30,
-        right: 20
-      },
-      legend: {
-        show: true,
-        icon: 'line',
-        top: 10
-      },
-      textStyle: {
-        fontSize: 12
-      },
-      xAxis: {
-        type: 'category',
-        boundaryGap: false,
-        splitLine: {
-          show: false
-        },
-      },
-      yAxis: {
-        type: 'value',
-        splitLine: {
-          show: false
-        },
-        nameLocation: 'end',
-        scale: true,
-        axisLabel: {
-          formatter: (value: number) => {
-            return (value * 100 ).toFixed(2) + '%'
-          }
-        }
-      },
-      series: [
-        {
-          type: 'line',
-          data: data.map(e=>[e.name, e.value]),
-          name: '涨跌幅'
-        }
-      ]
-    }
-    chart.setOption(options);
+    showChangeChart(data, this.ref.current)
   }
 
   componentDidMount() {
@@ -103,5 +49,63 @@ export default class ChangeMonitorChart extends React.Component<any, any> {
       </div>
     );
   }
+}
+
+export function showChangeChart(data: Array<changeType>, ref: any) {
+  const chart: echarts.ECharts = echarts.init(ref);
+  let options: echarts.EChartOption = {
+    tooltip: {
+      trigger: 'axis',
+      axisPointer: {
+        animation: false
+      },
+      formatter: (params: any, ticket: string, callback: any) => {
+        let obj = params[0]
+        return `${obj.data[0]}: ${(obj.data[1] * 100).toFixed(2)}%`
+      }
+    },
+    grid: {
+      left: 60,
+      top: 40,
+      bottom: 30,
+      right: 20
+    },
+    legend: {
+      show: true,
+      icon: 'line',
+      top: 10
+    },
+    textStyle: {
+      fontSize: 12
+    },
+    xAxis: {
+      type: 'category',
+      boundaryGap: false,
+      splitLine: {
+        show: false
+      },
+    },
+    yAxis: {
+      type: 'value',
+      splitLine: {
+        show: false
+      },
+      nameLocation: 'end',
+      scale: true,
+      axisLabel: {
+        formatter: (value: number) => {
+          return (value * 100 ).toFixed(2) + '%'
+        }
+      }
+    },
+    series: [
+      {
+        type: 'line',
+        data: data.map(e=>[e.name, e.value]),
+        name: '涨跌幅'
+      }
+    ]
+  }
+  chart.setOption(options);
 }
 

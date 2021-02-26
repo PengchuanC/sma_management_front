@@ -17,6 +17,7 @@ import {
   FundOutlined,
   DotChartOutlined,
   FieldNumberOutlined,
+  DollarCircleOutlined,
 } from '@ant-design/icons';
 import './index.less';
 import logo from '@/assets/images/logoNew.png';
@@ -73,7 +74,8 @@ class MainLayout extends React.Component {
     6: { name: '模拟投资', path: '/warehouse' },
     7: { name: '资产配置', path: '/allocate' },
     8: { name: '资金流向', path: '/capitalflow' },
-    9: { name: '数据同步', path: '/tools' },
+    9: { name: '盘中估值', path: '/change' },
+    10: { name: '数据同步', path: '/tools' },
   };
 
   toggle = () => {
@@ -157,12 +159,15 @@ class MainLayout extends React.Component {
               <Menu.Item key="8" icon={<FieldNumberOutlined />}>
                 资金流向
               </Menu.Item>
+              <Menu.Item key="9" icon={<DollarCircleOutlined />}>
+                盘中估值
+              </Menu.Item>
               <Menu.Divider />
               <Menu.SubMenu key="s2" icon={<ExperimentOutlined />} title="其他">
-                <Menu.Item key="9" icon={<CommentOutlined />}>
+                <Menu.Item key="10" icon={<CommentOutlined />}>
                   数据同步
                 </Menu.Item>
-                <Menu.Item key="10" icon={<UserOutlined />}>
+                <Menu.Item key="11" icon={<UserOutlined />}>
                   <a href={'/management/admin'}>后台站点</a>
                 </Menu.Item>
               </Menu.SubMenu>
