@@ -4,7 +4,7 @@ interface rowType {
   key: number;
   secucode: string;
   secuname: string;
-  holding: string;
+  hold: string;
   change?: number;
   name?: string;
   value: number;

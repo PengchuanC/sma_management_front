@@ -115,6 +115,28 @@ export default class HoldingStock extends React.Component<any, any> {
         align: 'right',
         render: (text: any, record: industryType) => formatPercent(record.ratioinequity),
       },
+      {
+        title: '100%化占比',
+        dataIndex: 'scaled_ratio',
+        key: 'scaled_ratio',
+        align: 'right',
+        render: (text: any, record: industryType) => formatPercent(record.scaled_ratio),
+        sorter: (a: industryType, b: industryType) => a.scaled_ratio - b.scaled_ratio,
+      },
+      {
+        title: '中证800配置',
+        dataIndex: 'weight',
+        key: 'weight',
+        align: 'right',
+        render: (text: any, record: industryType) => formatPercent(record.weight),
+      },
+      {
+        title: '100化-中证800',
+        dataIndex: 'diff',
+        key: 'diff',
+        align: 'right',
+        render: (text: any, record: industryType) => formatPercent(record.diff),
+      },
     ]
     return (
       <Row>
@@ -144,6 +166,9 @@ export default class HoldingStock extends React.Component<any, any> {
                 <Table.Summary.Cell index={1}>合计</Table.Summary.Cell>
                 <Table.Summary.Cell index={2} className={style.summaryRight}>{formatPercent(sum(this.state.industry.map(e=>e.ratio)))}</Table.Summary.Cell>
                 <Table.Summary.Cell index={3} className={style.summaryRight}>{formatPercent(sum(this.state.industry.map(e=>e.ratioinequity)))}</Table.Summary.Cell>
+                <Table.Summary.Cell index={4} className={style.summaryRight}>{formatPercent(sum(this.state.industry.map(e=>e.scaled_ratio)))}</Table.Summary.Cell>
+                <Table.Summary.Cell index={5} className={style.summaryRight}>{formatPercent(sum(this.state.industry.map(e=>e.weight)))}</Table.Summary.Cell>
+                <Table.Summary.Cell index={6} className={style.summaryRight}>{formatPercent(sum(this.state.industry.map(e=>e.diff)))}</Table.Summary.Cell>
               </Table.Summary.Row>
             )}
           />

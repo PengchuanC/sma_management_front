@@ -1,7 +1,8 @@
 @echo off
 echo packing...
 umi build
-cls
+clear
+
 echo prepare to upload
 del manage.tar.gz
 tar -cvf manage.tar.gz ./manage

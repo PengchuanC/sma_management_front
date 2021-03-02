@@ -96,6 +96,14 @@ export default class RealTimeChange extends React.Component<any, any> {
         dataIndex: 'hold',
         key: 'hold',
         align: 'center',
+        sorter: (a: rowType, b: rowType) => (a.hold >= b.hold ? 1 : -1),
+        filters: [
+          { text: '持有', value: '是' },
+          { text: '未持有', value: '否' },
+        ],
+        onFilter: (value: string, record: rowType) => {
+          return record.hold === value;
+        },
       },
       {
         title: '实时估值',

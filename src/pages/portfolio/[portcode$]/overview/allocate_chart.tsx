@@ -3,7 +3,6 @@ import echarts from 'echarts';
 import { DatePicker, Space } from 'antd';
 import http from '@/common/http';
 import numeral from 'numeral';
-import moment from 'moment';
 import styles from './overiew.less';
 
 
@@ -23,7 +22,12 @@ export default class AllocateChart extends React.Component<any, any> {
     let options: any = {
       tooltip: {
         trigger: 'item',
-        formatter: '{b}: {d}%'
+        formatter:  function (params: any, ticket: any, callback: any){
+          let data = params.data
+          let name = data.name
+          let value = (data.value * 100).toFixed(2)
+          return `${name}: ${value}%`
+        }
       },
       color: ['#900000','#c00000', '#D18484', '#E0B5B5', '#FFB6C1'],
       textStyle: {

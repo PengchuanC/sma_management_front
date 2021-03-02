@@ -95,7 +95,10 @@ interface industryType {
   key: number,
   firstindustryname: string,
   ratio: number,
-  ratioinequity: number
+  ratioinequity: number,
+  weight: number,
+  scaled_ratio: number,
+  diff: number
 }
 
 
