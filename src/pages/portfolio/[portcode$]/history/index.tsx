@@ -47,8 +47,9 @@ class HistoryLayout extends React.Component<any, any>{
     statistic: {
       total: {fee: 0, ratio: 0},
       last: {fee: 0, ratio: 0},
-      date: ''
-    }
+      date: '',
+      turn_over: 0
+    },
   }
 
   fetchData = ()=>{
@@ -89,6 +90,11 @@ class HistoryLayout extends React.Component<any, any>{
           <Col>
             <Card className={styles.statisticCard}>
               <Statistic title="占基金资产比例" value={this.state.statistic.last.ratio * 10000} suffix={'‱'} precision={2} />
+            </Card>
+          </Col>
+          <Col offset={1}>
+            <Card className={styles.statisticCard}>
+              <Statistic title="换手率" value={this.state.statistic.turn_over * 100} suffix={'%'} precision={2} />
             </Card>
           </Col>
         </Row>

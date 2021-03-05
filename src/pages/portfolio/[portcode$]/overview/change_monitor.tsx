@@ -43,7 +43,8 @@ export default class ChangeMonitorChart extends React.Component<any, any> {
   render() {
     return (
       <div className={styles.chartWrapper}>
-        {this.state.data.length > 0? <div className={styles.chart} ref={this.ref} />:
+        {this.state.data.length > 0?
+          <div className={styles.chart} ref={this.ref} />:
           <Spin className={styles.chart} style={{paddingTop: '120px'}}/>
         }
       </div>

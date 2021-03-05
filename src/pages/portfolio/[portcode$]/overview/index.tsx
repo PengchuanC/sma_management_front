@@ -8,6 +8,7 @@ import AllocateChart, { AvgAllocate } from '@/pages/portfolio/[portcode$]/overvi
 import ChangeMonitorChart from '@/pages/portfolio/[portcode$]/overview/change_monitor';
 import http from '@/common/http'
 import AvgPosition from '@/pages/portfolio/[portcode$]/overview/avg_postion';
+import ValueHistory from '@/pages/portfolio/[portcode$]/overview/value_history';
 
 
 export default class Overview extends React.Component<any, any> {
@@ -62,6 +63,12 @@ export default class Overview extends React.Component<any, any> {
                   <div className={styles.titleCard}>盘中监控</div>
                 </Card>
                 <ChangeMonitorChart portCode={portcode} />
+              </div>
+              <div className={styles.rowArea}>
+                <Card className={styles.titleCardWrapper} bordered={false}>
+                  <div className={styles.titleCard}>估值记录</div>
+                </Card>
+                <ValueHistory portCode={portcode} />
               </div>
               <div className={styles.rowArea}>
                 <Card className={styles.titleCardWrapper} bordered={false}>

@@ -263,7 +263,7 @@ class BrinsonCard extends React.Component<any, any> {
   ref: React.RefObject<any> = React.createRef()
 
   showChart = (data: any) => {
-    if (!!data) {
+    if (data == null) {
       return
     }
     let x1 = data.map((x: any)=>{return x.raa? x.raa.toFixed(4): 0});
@@ -369,6 +369,7 @@ class BrinsonCard extends React.Component<any, any> {
         },
       ]
     };
+    console.log("OK")
     myChart.setOption(option);
   }
 
@@ -385,7 +386,7 @@ class BrinsonCard extends React.Component<any, any> {
       size={'small'}
       className={styles.card2xHeight}
     >
-      <div ref={this.ref} className={styles.chart2xHeight} />
+      <div ref={this.ref} className={styles.chart2xHeight}/>
     </Card>
   );
   }
@@ -471,7 +472,7 @@ class MovingVolatility extends React.Component<any, any> {
         size={'small'}
         className={styles.card}
       >
-        <div ref={this.ref} className={styles.chart} />
+        <div ref={this.ref} className={styles.chart}/>
       </Card>
     );
   }
