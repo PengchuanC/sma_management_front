@@ -186,6 +186,11 @@ export default class HoldingFund extends React.Component<any, any> {
         columns={columns}
         dataSource={this.state.data}
         pagination={{defaultPageSize: 15, pageSizeOptions: ['15', '30', '50', '100', '200']}}
+        onRow={(row: holdingFundType)=>{
+          return {
+            onClick: ()=>{window.open(`http://product.nomuraoi-sec.com/factsheet/${row.secucode}.OF`) }
+          }
+        }}
       />
     );
   }
